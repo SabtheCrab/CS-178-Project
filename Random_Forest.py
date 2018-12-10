@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# In[4]:
-
-
 # Import all required libraries
 from __future__ import division 
 
@@ -14,25 +10,13 @@ import mltools as ml
 np.random.seed(0)
 get_ipython().magic(u'matplotlib inline')
 
-
-# In[5]:
-
-
 #import the X and Y training data
 X = np.genfromtxt('C:\data\X_train.txt', delimiter=None)
 Y = np.genfromtxt('C:\data\Y_train.txt', delimiter=None)
 X,Y = ml.shuffleData(X,Y)
 
-
-# In[6]:
-
-
 [Xtr,Xva,Ytr,Yva] = ml.splitData(X,Y)
 Xte = np.genfromtxt('C:\data\X_test.txt', delimiter=None)
-
-
-# In[13]:
-
 
 class BaggedTree(ml.base.classifier):
     def __init__(self, learners):
@@ -44,11 +28,6 @@ class BaggedTree(ml.base.classifier):
         n_bags = len(self.learners)
         preds = [self.learners[l].predictSoft(X) for l in range(n_bags)]
         return np.mean(preds, axis=0)
-    
-
-
-# In[40]:
-
 
 n_bags = 7
 bags = []   # self.learners
